@@ -19,7 +19,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://blog:RD8paskYC8Ayj09u@cluster0.pflplid.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://blog:aO1OQVkeQeMspVLl@cluster0.divjxam.mongodb.net/?retryWrites=true&w=majority');
+mongoose.set('strictQuery', false);
 
 app.post('/register', async (req,res) => {
   const {username,password} = req.body;
@@ -96,7 +97,9 @@ app.put('/post',uploadMiddleware.single('file'), async (req,res) => {
     const ext = parts[parts.length - 1];
     newPath = path+'.'+ext;
     fs.renameSync(path, newPath);
+    
   }
+  
 
   const {token} = req.cookies;
   jwt.verify(token, secret, {}, async (err,info) => {
@@ -133,6 +136,59 @@ app.get('/post/:id', async (req, res) => {
   const postDoc = await Post.findById(id).populate('author', ['username']);
   res.json(postDoc);
 })
+
+app.delete('/post/:id', async (req, res) => {
+  const { id } = req.params;
+  const { token } = req.cookies;
+  
+  // Verify token to get user info
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+
+    try {
+      const postDoc = await Post.findById(id);
+
+      // Check if the user is the author of the post
+      if (postDoc.author.equals(info.id)) {
+        await Post.findByIdAndDelete(id);
+        res.json({ message: 'Post deleted successfully' });
+      } else {
+        res.status(403).json({ error: 'You are not authorized to delete this post' });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  // Route to handle upvoting a specific post
+app.post("/post/:id/upvote", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await Post.findById(id);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    // Increment the upvotes count
+    post.upvotes += 1;
+
+    // Save the updated post
+    await post.save();
+
+    // Return the updated post data
+    res.json(post);
+  } catch (error) {
+    console.error("Error upvoting post:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+});
+
 
 app.listen(4000);
 //

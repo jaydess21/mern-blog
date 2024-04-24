@@ -4,6 +4,7 @@
 a{
     cursor: pointer;
 }
+
 body{
     color: #222;
 }
@@ -84,7 +85,7 @@ input{
     border-radius: 5px;
     background-color: #fff;
 }
-button{
+/* button{
     cursor: pointer;
     width: 100%;
     display: block;
@@ -94,6 +95,8 @@ button{
     border-radius: 5px;
     padding: 7px 0;
 }
+*/
+
 form.login h1, form.register h1{
     text-align: center;
 }
@@ -108,10 +111,7 @@ div.post-page div.image img{
     object-position: center center;
     width: 100%;
 }
-div.post-page a{
-    color:#333;
-    text-decoration: underline;
-}
+
 div.post-page h1{
     text-align: center;
     margin: 10px 0 5px;
@@ -136,20 +136,55 @@ div.content p{
 div.content li{
     margin-bottom: 10px;
 }
+
 div.edit-row{
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
 }
-div.post-page a.edit-btn{
-    background-color: #333;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    color: #fff;
-    padding:15px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-}
+
 a svg{
     height:20px;
 }
+.edit-row {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the column */
+  }
+  
+  .edit-btn {
+    background-color: #848484;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    border: 0;
+    text-decoration: none; /* Remove underline from anchor element */
+    margin-top: 10px; /* Add vertical spacing between buttons */
+    font-size: small;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  .del-btn {
+    background-color: #f60a0a;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: 0;
+    text-decoration: none; /* Remove underline from button element */
+    margin-top: 10px;
+    font-size: small;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  .upvote-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upvote-btn:hover {
+    background-color: #0056b3;
+  }
+  
