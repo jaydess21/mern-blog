@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "./UserContext";
+import expressLogo from "./assets/express.png";
 
 export default function Header() {
   const {setUserInfo,userInfo} = useContext(UserContext);
@@ -26,7 +27,10 @@ export default function Header() {
 
   return (
     <header>
-      <Link to="/" className="logo">MyBlog</Link>
+       <a href="/" className="logo">
+        <img src={expressLogo} alt="Express Logo" />
+      </a>
+      
       <nav>
         {username && (
           <>

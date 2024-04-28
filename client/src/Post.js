@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
-import { FaThumbsUp } from "react-icons/fa"; // Import thumbs-up icon
+import { FaThumbsUp } from "react-icons/fa";
 
-export default function Post({ _id, title, summary, cover, createdAt, author, onUpvote }) {
+export default function Post({ _id, title, summary, cover, createdAt, author, upvotes, onUpvote }) {
   const [isUpvoted, setIsUpvoted] = useState(false);
 
   const handleUpvote = () => {
@@ -16,9 +16,9 @@ export default function Post({ _id, title, summary, cover, createdAt, author, on
 
   return (
     <div className="post">
-      <div className="image">
+      <div className="im">
         <Link to={`/post/${_id}`}>
-          <img src={`http://localhost:4000/${cover}`} alt={title} />
+        <img className="image" src={`http://localhost:4000/${cover}`} alt={title} />
         </Link>
       </div>
       <div className="texts">
@@ -26,13 +26,13 @@ export default function Post({ _id, title, summary, cover, createdAt, author, on
           <h2>{title}</h2>
         </Link>
         <p className="info">
-          <span className="author">{author.username}</span>
+          <span className="author">@{author.username}</span>
           <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
-        <p className="summary">{summary}</p>
+       
         <div className="upvote-section">
-          <button className="upvote-btn" onClick={handleUpvote} disabled={isUpvoted}>
-            <FaThumbsUp /> Upvote
+          <button className= "votes" onClick={handleUpvote} disabled={isUpvoted}>
+            <FaThumbsUp /> Upvote ({upvotes})
           </button>
         </div>
       </div>

@@ -1,8 +1,9 @@
+const User = require('./models/User');
+const Post = require('./models/Post');
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require("mongoose");
-const User = require('./models/User');
-const Post = require('./models/Post');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
@@ -160,16 +161,17 @@ app.delete('/post/:id', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+})
 
-  // Route to handle upvoting a specific post
-app.post("/post/:id/upvote", async (req, res) => {
+// Route to handle upvoting a specific post
+app.post('/post/:id/upvote', async (req, res) => {
   const { id } = req.params;
 
   try {
     const post = await Post.findById(id);
 
     if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+      return res.status(404).json({ error: 'Post not found' });
     }
 
     // Increment the upvotes count
@@ -181,13 +183,38 @@ app.post("/post/:id/upvote", async (req, res) => {
     // Return the updated post data
     res.json(post);
   } catch (error) {
-    console.error("Error upvoting post:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error('Error upvoting post:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
+// Add a route to create a new comment under a specific post
+app.post('/post/:id/comments', async (req, res) => {
+  const postId = req.params.id;
+  const { content } = req.body;
 
+  try {
+    // Find the post by ID
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    // Add the comment to the post's comments array
+    post.comments.push({ content });
+
+    // Save the updated post document
+    await post.save();
+
+    // Send a success response
+    res.status(201).json({ message: 'Comment added successfully', post });
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
+
 
 
 app.listen(4000);

@@ -4,24 +4,40 @@
 a{
     cursor: pointer;
 }
+.logo{
 
+max-width: 25%;
+
+
+}
 body{
     color: #222;
 }
+
 img{
     max-width: 100%;
+    max-height: 100%;
 }
+.image {
+    max-width: 80%;
+    max-height: 80%;
+    border: 5px solid #007cbb; /* Add solid border with the specified color */
+}
+
 main{
     padding: 10px;
-    max-width: 960px;
+    max-width: 1000px;
     margin: 0 auto;
+    
 }
 header{
     display:flex;
     justify-content:space-between;
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 80px;
     align-items: center;
+
+
 }
 header a{
     text-decoration:none;
@@ -29,18 +45,21 @@ header a{
 }
 header a.logo{
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 header nav{
     display:flex;
     gap: 24px;
+    font-weight: bold;
+    color:#007cbb;
 }
 
 div.post{
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 1px;
     margin-bottom: 30px;
+
 }
 @media screen and (min-width: 700px) {
     div.post{
@@ -55,17 +74,19 @@ div.post div.texts h2{
 div.post div.texts a{
     text-decoration:none;
     color: inherit;
+    
 }
 div.post p.info{
-    margin:24px 0;
-    color: #888;
+    margin:5px 0;
+    color: #007cbb;
     font-size:1rem;
     font-weight: bold;
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 div.post p.info a.author{
     color:#333;
+    
 }
 div.post p.summary{
     margin:10px 0;
@@ -76,6 +97,7 @@ form.login, form.register{
     max-width: 400px;
     margin: 0 auto;
 }
+
 input{
     display: block;
     margin-bottom: 5px;
@@ -85,24 +107,14 @@ input{
     border-radius: 5px;
     background-color: #fff;
 }
-/* button{
-    cursor: pointer;
-    width: 100%;
-    display: block;
-    background-color: #555;
-    border:0;
-    color: #fff;
-    border-radius: 5px;
-    padding: 7px 0;
-}
-*/
+
 
 form.login h1, form.register h1{
     text-align: center;
 }
 
 div.post-page div.image{
-    max-height:300px;
+    max-height:auto;
     display: flex;
     overflow:hidden;
 }
@@ -115,6 +127,7 @@ div.post-page div.image img{
 div.post-page h1{
     text-align: center;
     margin: 10px 0 5px;
+    
 }
 div.post-page time{
     text-align: center;
@@ -132,6 +145,8 @@ div.post-page div.author{
 div.content p{
     line-height: 1.7rem;
     margin: 30px 0;
+    font-size: 1.4rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 div.content li{
     margin-bottom: 10px;
@@ -176,15 +191,133 @@ a svg{
   }
   
   .upvote-btn {
-    background-color: #007bff;
+    color: #007cbb;
+    padding: 15px 30px;
+    border-radius: 5px;
+    border: 0;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;
+    text-decoration: none; /* Remove underline from anchor element */
+    margin-top: 10px; /* Add vertical spacing between buttons */
+    font-size: small;
+    margin-left: 421px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  .votes{
+    margin-bottom: 5px;
+  }
+  
+  .upvote-btn:hover {
+    background-color: #3b4f59;
+  }
+  
+  /* Comment Section */
+.comments {
+    margin-top: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  .comments h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .comment {
+    border: 1px solid #80b2e2;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  .comment p {
+    margin: 5px 0;
+  }
+  
+  .comment p:first-child {
+    font-weight: bold;
+  }
+  
+  .comment p:last-child {
+    color: #666;
+  }
+  
+  textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  button {
+    padding: 5px 10px;
+    background-color: #80b2e2;
     color: #fff;
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
-  .upvote-btn:hover {
+  button:hover {
     background-color: #0056b3;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Sort by */
+
+  .sortBy button {
+    margin-top: 20px;
+    background-color: #007cbb;
+    margin-left: 1px;
+  }
+
+
+.sort {
+
+margin-bottom: 20px;
+margin-top: 20px;
+color: #007cbb;
+
+
+}
+
+/* Path: client/src/components/Post.js search bar */
+
+.searchBar {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    margin-bottom: 20px;
+    
+  }
+  
+  .searchBar input[type="text"] {
+    padding: 12px 20px;
+    border: 1px solid #68b9e4;
+    border-radius: 4px;
+    margin-right: 5px;
+    width: 900px;
+  }
+  
+  .searchBar button {
+    padding: 12.5px 16px;
+    margin-bottom: 4px;
+    background-color: #68b9e4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .searchBar button:hover {
+    background-color: rgb(104, 185, 228);
   }
   
